@@ -15,7 +15,7 @@ export const foodItems = [
         section: 'pizza'
     },
     {
-        name: 'CHicken Pizza',
+        name: 'Chicken Pizza',
         img: '/img/pizza4.jpg',
         section: 'pizza'
     },
