@@ -25,6 +25,6 @@ export const Food = styled(Title)`
     box-shadow: 0px 0px 10px 0px #9E9E9E;
     &:hover {
         cursor: pointer;
-        opacity: 0.7;
+        opacity: 0.5;
     }
 `
