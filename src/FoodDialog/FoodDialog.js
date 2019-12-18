@@ -65,11 +65,21 @@ const DialogBannerName = styled(FoodLabel)`
     
 `;
 
-export function FoodDialog({openFood, setOpenFood }){
+export function FoodDialog({openFood, setOpenFood, setOrders, orders }){
     function close(){
         setOpenFood();
     }
+    
     if (!openFood) return null;
+
+    const order = {
+        name: openFood.name
+    }
+
+    function addToOrder(){
+        setOrders([...orders, order]);
+        close();
+    }
         return(
         <>
             <DialogShadow onClick={close} />
@@ -81,7 +91,7 @@ export function FoodDialog({openFood, setOpenFood }){
 
               </DialogContent>
               <DialogFooter>
-                    <ConfirmButton>Agregar al Pedido</ConfirmButton>
+                    <ConfirmButton onCLik={addToOrder}>Agregar al Pedido</ConfirmButton>
               </DialogFooter>
             </Dialog>
         </>
