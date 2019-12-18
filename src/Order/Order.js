@@ -22,7 +22,7 @@ const OrderContent = styled(DialogContent)`
 
 const OrderContainer = styled.div`
     padding: 10px 0px;
-    border-botton: 1px solid grey;
+    border-bottom: 1px solid grey;
 `;
 
 const OrderItem = styled.div`
