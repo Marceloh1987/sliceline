@@ -25,19 +25,19 @@ export const foodItems = [
         section: 'pizza'
     },
     {
-        name: 'Burger Pizza',
+        name: 'Burger',
         img: '/img/pizza6.jpg',
-        section: 'Burguer'
+        section: 'Burger'
     },
     {
-        name: 'Gyro Pizza',
+        name: 'Chesse Burger',
         img: '/img/pizza7.jpg',
-        section: 'Burguer'
+        section: 'Burger'
     },
     {
-        name: 'Frie Pizza',
+        name: 'Burger whit chips',
         img: '/img/pizza8.jpg',
-        section: 'Burguer'
+        section: 'Burger'
     }
 ];
 
