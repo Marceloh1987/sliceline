@@ -91,7 +91,7 @@ export function FoodDialog({openFood, setOpenFood, setOrders, orders }){
 
               </DialogContent>
               <DialogFooter>
-                    <ConfirmButton onCLik={addToOrder}>Agregar al Pedido</ConfirmButton>
+                    <ConfirmButton onClick={addToOrder}>Agregar al Pedido</ConfirmButton>
               </DialogFooter>
             </Dialog>
         </>
