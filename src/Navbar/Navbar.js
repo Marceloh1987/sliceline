@@ -5,7 +5,7 @@ import { Title } from "../Styles/Title";
 
 const NavbarStyled = styled.div`
     background-color: ${pizzaRed};
-    padding: 10px;
+    padding: 0px;
     position: fixed;
     width: 100%;
     z-index: 999;
