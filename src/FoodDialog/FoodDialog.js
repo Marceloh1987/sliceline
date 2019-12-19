@@ -6,6 +6,8 @@ import { Title } from '../Styles/Title';
 import { formatPrice } from '../Data/FoodData';
 import { QuantityInput } from './/QuantityInput';
 import { useQuantity }from '../Hooks/useQuantity';
+import { Toppings } from './Toppings';
+import { useToppings } from '../Hooks/useToppings';
 
 const Dialog = styled.div`
     width: 500px;
@@ -22,6 +24,7 @@ export const DialogContent = styled(Title)`
     overflow: auto;
     min-height: 100px;
     padding: 0px 40px;
+    padding-bottom: 80px;
 `;
 
 export const DialogFooter = styled.div`
@@ -69,12 +72,23 @@ const DialogBannerName = styled(FoodLabel)`
     
 `;
 
-export function getPrice(order){
-    return order.quantity * order.price;
+const pricePerTopping = 500;
+
+export function getPrice(order) {
+    return (
+        order.quantity * 
+        (order.price + 
+            order.toppings.filter(t => t.checked).length * pricePerTopping)
+    );
+}
+
+function hasToppings(food) {
+    return food.section === 'pizza';
 }
 
 function FoodDialogContainer({openFood, setOpenFood, setOrders, orders }){
     const quantity = useQuantity(openFood && openFood.quiantity);
+    const toppings = useToppings(openFood.toppings);
     function close(){
         setOpenFood();
     }
@@ -83,8 +97,9 @@ function FoodDialogContainer({openFood, setOpenFood, setOrders, orders }){
 
     const order = {
         ...openFood,
-        quantity: quantity.value
-    };
+        quantity: quantity.value,
+        toppings: toppings.toppings
+      };
 
     function addToOrder(){
         setOrders([...orders, order]);
@@ -99,6 +114,11 @@ function FoodDialogContainer({openFood, setOpenFood, setOrders, orders }){
               </DialogBanner>   
               <DialogContent>
                 <QuantityInput quantity={quantity} />
+                {hasToppings(openFood) && 
+                <> 
+                    <h3> Deseas Agregar ingredientes a tu pizza? </h3>
+                    <Toppings {...toppings}/>
+                </>}
               </DialogContent>
               <DialogFooter>
                     <ConfirmButton onClick={addToOrder}>
