@@ -35,13 +35,26 @@ const IncrementButton = styled.div`
     }
 `;
 
-export function QuantityInput({quantity}) {
+export function QuantityInput({ quantity }) {
     return (
     <IncrementContainer> 
-        <div> Cantidad: </div>
-        <IncrementButton> - </IncrementButton>
-            <QuantityInputStyled {...quantity}/>
-        <IncrementButton> + </IncrementButton>
+        <div>Cantidad:</div>
+        <IncrementButton
+         onClick={() => {
+            quantity.setValue(quantity.value - 1);
+        }}
+         disabled={quantity.value === 1}
+         >
+          - 
+        </IncrementButton>
+        <QuantityInputStyled {...quantity} />
+        <IncrementButton 
+        onClick={() => {
+            quantity.setValue(quantity.value + 1);
+        }}
+        >
+         + 
+        </IncrementButton>
         </IncrementContainer>
     );
 }
