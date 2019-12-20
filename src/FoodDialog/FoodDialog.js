@@ -94,27 +94,35 @@ function hasToppings(food) {
     return food.section === 'pizza';
 }
 
-function FoodDialogContainer({openFood, setOpenFood, setOrders, orders }){
-    const quantity = useQuantity(openFood && openFood.quiantity);
+function FoodDialogContainer({ openFood, setOpenFood, setOrders, orders }) {
+    const quantity = useQuantity(openFood && openFood.quantity);
     const toppings = useToppings(openFood.toppings);
     const choiceRadio = useChoice(openFood.choice);
-    function close(){
-        setOpenFood();
+    const isEditing = openFood.index > -1;
+  
+    function close() {
+      setOpenFood();
     }
-    
-    if (!openFood) return null;
-
+  
     const order = {
-        ...openFood,
-        quantity: quantity.value,
-        toppings: toppings.toppings,
-        choice: choiceRadio.value
-      };
-
-    function addToOrder(){
-        setOrders([...orders, order]);
-        close();
+      ...openFood,
+      quantity: quantity.value,
+      toppings: toppings.toppings,
+      choice: choiceRadio.value
+    };
+  
+    function editOrder() {
+      const newOrders = [...orders];
+      newOrders[openFood.index] = order;
+      setOrders(newOrders);
+      close();
     }
+  
+    function addToOrder() {
+      setOrders([...orders, order]);
+      close();
+    }
+  
         return(
         <>
             <DialogShadow onClick={close} />
@@ -133,8 +141,12 @@ function FoodDialogContainer({openFood, setOpenFood, setOrders, orders }){
                 {openFood.choices && <Choices openFood={openFood} choiceRadio={choiceRadio}/>}
               </DialogContent>
               <DialogFooter>
-                    <ConfirmButton onClick={addToOrder} disable={openFood.choices && !choiceRadio.value}>
-                        Agregar al Pedido: {formatPrice(getPrice(order))}
+                    <ConfirmButton
+                     onClick={isEditing ? editOrder : addToOrder}
+                     disabled={openFood.choices && !choiceRadio.value}
+                     >
+                        {isEditing ? ' Modificar Pedido: ' : 'Agregar al Pedido: '} 
+                        {formatPrice(getPrice(order))}
                     </ConfirmButton>
               </DialogFooter>
             </Dialog>
