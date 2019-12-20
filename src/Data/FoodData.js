@@ -53,7 +53,14 @@ export const foodItems = [
         img: '/img/pizza8.jpg',
         section: 'Burger',
         price: 3990
+    },
+    {  
+        price: 1990,
+        name: 'Bebidas',
+        section: 'Bebestibles',
+        choices: ['Coca-cola', 'Fanta', 'Sprite', 'Cerveza']
     }
+
 ];
 
 export const foods = foodItems.reduce((res, food) => {
