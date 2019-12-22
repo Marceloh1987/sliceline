@@ -7,6 +7,7 @@ import { DialogContent,
 import { Title } from '../Styles/Title';
 import {formatPrice} from "../Data/FoodData";
 import { getPrice } from "../FoodDialog/FoodDialog";
+import {MercadoPago} from '../PagoOnline/pago';
 
 const OrderStyled = styled(Title)`
 position: fixed;
@@ -114,6 +115,7 @@ export function Order({orders, setOrders, setOpenFood}){
                         <div>{formatPrice(subtotal)}</div>
                     </OrderItem>
                 </OrderContainer>
+                <MercadoPago items={orders} />
             </OrderContent>
         )}
         <DialogFooter>
