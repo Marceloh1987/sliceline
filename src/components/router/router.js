@@ -7,7 +7,6 @@ import { MercadoPago } from '../../PagoOnline/pago';
 
 export const Routes = () =>{
     
-    console.log('Routes!')
     return(
         <BrowserRouter>
             <Switch>

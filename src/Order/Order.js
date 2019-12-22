@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { DialogContent,
          DialogFooter, 
@@ -115,14 +116,15 @@ export function Order({orders, setOrders, setOpenFood}){
                         <div>{formatPrice(subtotal)}</div>
                     </OrderItem>
                 </OrderContainer>
-                <MercadoPago items={orders} />
             </OrderContent>
         )}
-        <DialogFooter>
-            <ConfirmButton>
-                Checkout
-            </ConfirmButton>
-        </DialogFooter>
+        <Link to={{ pathname: '/Pago', query: {orders}}}>
+            <DialogFooter>
+                <ConfirmButton>
+                    Checkout
+                </ConfirmButton>
+            </DialogFooter>
+        </Link>
     </OrderStyled>
     );
 }
