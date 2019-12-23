@@ -2,6 +2,10 @@ import React, {useEffect, useState} from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import * as mp from 'mercadopago';
 import credentials from './credentials.json'
+import { Navbar } from '../Navbar/Navbar';
+import { Banner } from '../Banner/Banner';
+import { GlobalStyle }  from '../Styles/GlobalStyle';
+import styled from 'styled-components';
 
 export function MercadoPago(props) {
 
@@ -23,6 +27,11 @@ export function MercadoPago(props) {
                 name: 'alguien',
                 surname: 'queseyo',
                 email: 'laconshaumare@gmail.com'
+            },
+            back_urls: {
+                success: 'https://google.cl',
+                pending: 'https://www.facebook.com',
+                failure: 'https://www.youtube.com'
             }
         }
         return preferences;
@@ -63,12 +72,28 @@ export function MercadoPago(props) {
         )
     }
 
-    return(
+    const PayForm = styled.div`
+    height: 100px; 
+    padding: 10px; 
+    font-size: 20px; 
+    background-position: center;
+    background-size: cover;
+    
+    margin-top: 5px; 
+    transition-property: box-shadow margin-top filter; 
+   
+
+    `
+
+    return (
+        <>
+        <GlobalStyle/>
+        <Navbar/>
+        <Banner/>
+        <PayForm>
         <div>
             <h1>Pagando...</h1>
             <h5>chequear en consola.</h5>
-            <br/>
-            <br/>
             <br/>
             <br/>
             <h3>Detalle</h3>
@@ -87,5 +112,7 @@ export function MercadoPago(props) {
 
 
         </div>
+        </PayForm>
+        </>
     )
 }
