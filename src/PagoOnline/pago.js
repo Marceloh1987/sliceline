@@ -23,6 +23,11 @@ export function MercadoPago(props) {
                 name: 'alguien',
                 surname: 'queseyo',
                 email: 'laconshaumare@gmail.com'
+            },
+            back_urls: {
+                success: 'https://google.cl',
+                pending: 'https://www.facebook.com',
+                failure: 'https://www.youtube.com'
             }
         }
         return preferences;
