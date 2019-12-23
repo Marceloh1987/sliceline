@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import { DialogContent,
          DialogFooter, 
@@ -7,6 +8,7 @@ import { DialogContent,
 import { Title } from '../Styles/Title';
 import {formatPrice} from "../Data/FoodData";
 import { getPrice } from "../FoodDialog/FoodDialog";
+import {MercadoPago} from '../PagoOnline/pago';
 
 const OrderStyled = styled(Title)`
 position: fixed;
@@ -116,11 +118,13 @@ export function Order({orders, setOrders, setOpenFood}){
                 </OrderContainer>
             </OrderContent>
         )}
-        <DialogFooter>
-            <ConfirmButton>
-                Checkout
-            </ConfirmButton>
-        </DialogFooter>
+        <Link to={{ pathname: '/Pago', query: {orders}}}>
+            <DialogFooter>
+                <ConfirmButton>
+                    Checkout
+                </ConfirmButton>
+            </DialogFooter>
+        </Link>
     </OrderStyled>
     );
 }
