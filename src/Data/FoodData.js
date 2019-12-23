@@ -56,6 +56,7 @@ export const foodItems = [
     },
     {  
         price: 1990,
+        img: '/img/Bebidas.jpg',
         name: 'Bebidas',
         section: 'Bebestibles',
         choices: ['Coca-cola', 'Fanta', 'Sprite', 'Cerveza']
