@@ -12,14 +12,21 @@ import { useChoice } from '../Hooks/useChoice';
 import { Choices } from './Choices';
 
 const Dialog = styled.div`
-    width: 500px;
+    width: 660px;
     background-color: white;
     position: fixed;
     top: 75px;
     z-index: 5;
     max-height: calc(100% - 100px);
     left: calc(50% - 250px);
-    flex-direction: colimn;
+    display: flex;
+    flex-direction: column;
+    @media (max-width:480px){
+        width: 100%;
+        top:125px;
+        overflow: auto;
+        left:0;
+}
 `;
 
 export const DialogContent = styled(Title)`
@@ -30,10 +37,11 @@ export const DialogContent = styled(Title)`
 `;
 
 export const DialogFooter = styled.div`
-    box-shadow: 0px -2px 10px 0px grey;
-    height: 60px;
+    box-shadow: 0px -2px 20px 0px grey;
+    height: 80px;
     display: flex;
     justify-content: center;
+    padding-bottom: 10px;
 `;
 
  export const ConfirmButton = styled(Title)`
@@ -77,6 +85,7 @@ const DialogBanner = styled.div`
 const DialogBannerName = styled(FoodLabel)`
     font-size: 30px;
     padding: 5px 40px;
+    margin-left: 0px;
     top: ${({img}) => (img ? `100px` : `20px`)};
 `;
 
