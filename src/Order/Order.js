@@ -1,14 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import { DialogContent,
-         DialogFooter, 
-         ConfirmButton
-} from '../FoodDialog/FoodDialog';
+import { DialogContent, DialogFooter, ConfirmButton } from '../FoodDialog/FoodDialog';
 import { Title } from '../Styles/Title';
 import {formatPrice} from "../Data/FoodData";
 import { getPrice } from "../FoodDialog/FoodDialog";
 import {MercadoPago} from '../PagoOnline/pago';
+
+const database = window.firebase.database();
 
 const OrderStyled = styled(Title)`
 position: fixed;
@@ -55,6 +54,33 @@ const DetailItem = styled.div`
     color: grey;
     font-size: 10;
 `;
+function sendOrder(orders, {email, displayName}){
+    var newOrderRef = database.ref('orders').push();
+    const newOrders = orders.map(order => {
+        return Object.keys(order).reduce((acc, orderKey) => {
+            if(!order[orderKey]) {
+                return acc;
+            }
+            if (orderKey === "toppings") {
+                return {
+                ...acc,
+                [orderKey]: order[orderKey]
+                .filter(({ checked}) => checked)
+                .map(({ name }) => name)
+                };
+            }  
+            return {
+                ...acc,
+                [orderKey]: order[orderKey]
+            };  
+    }, {});
+    });
+    newOrderRef.set({
+        Order: newOrders,
+        email,
+        displayName
+    });
+}
 
 export function Order({orders, setOrders, setOpenFood, login, loggedIn}){
     const subtotal = orders.reduce((total, order) => {
@@ -122,7 +148,7 @@ export function Order({orders, setOrders, setOpenFood, login, loggedIn}){
             <DialogFooter>
                 <ConfirmButton onClick={() => {
                     if(loggedIn){
-                        console.log('logged in');
+                        sendOrder(orders, loggedIn);
                     } else {
                         login();
                     }

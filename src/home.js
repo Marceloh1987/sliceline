@@ -11,7 +11,6 @@ import { useOrders } from "./Hooks/useOrders";
 import { useTitle } from "./Hooks/useTitle";
 import { useAuthentication } from './Hooks/useAuthentication';
 
-
 export const Home = () =>{
     const openFood = useOpenFood();
     const orders = useOrders();
