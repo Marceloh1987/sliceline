@@ -56,7 +56,7 @@ const DetailItem = styled.div`
     font-size: 10;
 `;
 
-export function Order({orders, setOrders, setOpenFood}){
+export function Order({orders, setOrders, setOpenFood, login, loggedIn}){
     const subtotal = orders.reduce((total, order) => {
         return total + getPrice(order);
     }, 0);
@@ -120,9 +120,13 @@ export function Order({orders, setOrders, setOpenFood}){
         )}
         <Link to={{ pathname: '/Pago', query: {orders}}}>
             <DialogFooter>
-                <ConfirmButton>
-                    Checkout
-                </ConfirmButton>
+                <ConfirmButton onClick={() => {
+                    if(loggedIn){
+                        console.log('logged in');
+                    } else {
+                        login();
+                    }
+                }}>Checkout</ConfirmButton>
             </DialogFooter>
         </Link>
     </OrderStyled>
