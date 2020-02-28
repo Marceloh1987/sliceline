@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import { Navbar } from "./Navbar/Navbar";
 import { Banner } from "./Banner/Banner";
@@ -9,6 +9,17 @@ import { Order } from "./Order/Order";
 import { useOpenFood } from "./Hooks/useOpenFood";
 import { useOrders } from "./Hooks/useOrders";
 import { useTitle } from "./Hooks/useTitle";
+
+const auth = window.firebase.auth();
+const provider = new window.firebase.auth.GoogleAuthProvider();
+
+auth.signInWithPopup(provider);
+
+auth.onAuthStateChanged(function(user){
+    console.log(user);
+}, function(error){
+    console.log(error);
+});
 
 export const Home = () =>{
     const openFood = useOpenFood();
